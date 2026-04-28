@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎯 يلا بينا يابطل - اختبر نفسك في Local Search و Genetic Algorithms</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Kashmir CSP | 60 سؤال · إجابات مسلسلة a,b,c,d</title>
     <style>
         * {
             margin: 0;
@@ -12,1369 +13,514 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
             min-height: 100vh;
-            padding: 20px;
+            background: linear-gradient(135deg, #cbdde6 0%, #a6bfcc 100%);
+            font-family: 'Segoe UI', 'Poppins', 'Inter', system-ui, -apple-system, 'Roboto', sans-serif;
+            padding: 2rem 1.5rem;
+            color: #1a3a44;
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .container {
-            max-width: 900px;
+        .quiz-wrapper {
+            max-width: 1300px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 40px;
-            backdrop-filter: blur(10px);
+            background: rgba(250, 252, 254, 0.94);
+            backdrop-filter: blur(2px);
+            border-radius: 2.5rem;
+            padding: 1.8rem 2rem;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.75);
         }
 
-        .header {
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background: rgba(70, 105, 115, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 2rem;
+            border-left: 7px solid #4f7f8c;
+        }
+
+        h1 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(130deg, #1e5d6b, #32818f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 2rem;
+            background: rgba(205, 225, 235, 0.6);
+            padding: 0.3rem 1.5rem;
+            border-radius: 3rem;
+        }
+
+        .stat-card {
             text-align: center;
-            margin-bottom: 40px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 30px;
-            border-radius: 15px;
-            color: white;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
         }
 
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        .stat-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: #255c6b;
         }
 
-        .header p {
-            font-size: 1.1em;
-            opacity: 0.95;
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: 'Courier New', monospace;
+            color: #1a505e;
+            line-height: 1.1;
         }
 
         .progress-container {
-            margin-bottom: 30px;
-            background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
-            padding: 20px;
-            border-radius: 10px;
-            color: white;
-        }
-
-        .progress-bar {
-            width: 100%;
+            background: #cddee5;
+            border-radius: 60px;
+            margin: 1.2rem 0 2rem 0;
             height: 10px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 5px;
-            overflow: hidden;
-            margin-bottom: 10px;
+            box-shadow: inset 0 1px 4px #00000022;
         }
 
         .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            background: linear-gradient(90deg, #468792, #6fc1d0);
             width: 0%;
-            transition: width 0.3s ease;
+            height: 10px;
+            border-radius: 60px;
+            transition: width 0.25s ease;
         }
 
-        .progress-text {
-            display: flex;
-            justify-content: space-between;
-            font-weight: bold;
+        .question-card {
+            background: #ffffffdd;
+            backdrop-filter: blur(4px);
+            border-radius: 2rem;
+            padding: 1.7rem 2rem;
+            margin-bottom: 1.8rem;
+            border: 1px solid #cde0e8;
+            box-shadow: 0 12px 25px -12px rgba(0, 0, 0, 0.2);
         }
 
-        .question-container {
-            margin-bottom: 40px;
-            display: none;
-            animation: slideIn 0.5s ease;
+        .q-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 1.6rem;
+            color: #1c4b58;
         }
 
-        .question-container.active {
-            display: block;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .question-number {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            display: inline-block;
-            font-weight: bold;
-            margin-bottom: 15px;
-            font-size: 0.9em;
-        }
-
-        .question-text {
-            font-size: 1.3em;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: #333;
-            line-height: 1.5;
-        }
-
-        .options {
+        .options-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 0.9rem;
         }
 
-        .option {
-            padding: 15px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border: 2px solid transparent;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1em;
+        .option-row {
+            background: #f5fafd;
+            border-radius: 1.5rem;
+            padding: 0.8rem 1.5rem;
             display: flex;
-            align-items: center;
-        }
-
-        .option:hover {
-            transform: translateX(10px);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-color: #667eea;
-        }
-
-        .option input {
-            margin-right: 12px;
+            align-items: baseline;
+            gap: 1rem;
             cursor: pointer;
-            width: 20px;
-            height: 20px;
+            transition: 0.2s;
+            border: 1px solid #cbdde6;
+            font-weight: 500;
+            font-size: 1rem;
+            color: #1f4c5a;
         }
 
-        .option.correct {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            color: white;
-            border-color: #38ef7d;
+        .option-row:hover {
+            background: #eaf3f8;
+            transform: scale(0.99);
+            border-color: #689fae;
         }
 
-        .option.incorrect {
-            background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);
-            color: white;
-            border-color: #ff6a00;
+        .opt-letter {
+            font-weight: 800;
+            font-size: 1.1rem;
+            min-width: 2rem;
+            color: #327a8a;
         }
 
-        .option.disabled {
-            cursor: not-allowed;
+        .opt-text {
+            flex: 1;
         }
 
-        .explanation {
-            margin-top: 20px;
-            padding: 15px;
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            border-left: 4px solid #ff6a00;
-            border-radius: 8px;
-            color: #333;
-            line-height: 1.6;
-            display: none;
-            animation: slideIn 0.5s ease;
+        .feedback-area {
+            margin-top: 1.3rem;
+            padding: 1rem;
+            border-radius: 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            background: #edf4f8;
+            border-left: 5px solid;
         }
 
-        .explanation.show {
-            display: block;
+        .correct-feedback {
+            border-left-color: #2b8b6e;
+            background: #e0f2ec;
+            color: #165a48;
         }
 
-        .explanation strong {
-            color: #d84315;
+        .wrong-feedback {
+            border-left-color: #cd7a6b;
+            background: #ffe9e5;
+            color: #993d2e;
         }
 
-        .translate-btn {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-            font-size: 0.95em;
-        }
-
-        .translate-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
-        }
-
-        .translate-modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .translate-content {
-            background: white;
-            margin: 10% auto;
-            padding: 30px;
-            border: none;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 700px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .close:hover {
-            color: #000;
-        }
-
-        .navigation {
+        .nav-buttons {
             display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 30px;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1rem;
+            margin: 2rem 0 0.5rem;
         }
 
         button {
-            padding: 12px 25px;
-            font-size: 1em;
+            background: #4f828f;
             border: none;
-            border-radius: 8px;
+            padding: 0.8rem 2rem;
+            border-radius: 3rem;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: white;
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
+            transition: 0.2s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            letter-spacing: 1px;
         }
 
-        .btn-prev {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
+        button:hover {
+            background: #3d6874;
+            transform: translateY(-2px);
         }
 
-        .btn-prev:hover {
-            transform: translateX(-5px);
-            box-shadow: 0 5px 15px rgba(240, 147, 251, 0.4);
+        .reset-btn {
+            background: #8f6b5b;
         }
 
-        .btn-next {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
+        .reset-btn:hover {
+            background: #755546;
         }
 
-        .btn-next:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
-        }
-
-        .btn-finish {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            color: white;
-            padding: 15px 40px;
-            font-size: 1.1em;
-        }
-
-        .btn-finish:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(56, 239, 125, 0.4);
-        }
-
-        .btn-finish:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .results {
-            display: none;
+        .complete-message {
             text-align: center;
-            animation: slideIn 0.5s ease;
-        }
-
-        .results.show {
-            display: block;
-        }
-
-        .score {
-            font-size: 3em;
+            font-size: 1.7rem;
             font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 20px 0;
+            padding: 2rem;
+            color: #1f6779;
         }
 
-        .score-message {
-            font-size: 1.5em;
-            margin-bottom: 30px;
-            color: #333;
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            opacity: 0.7;
+            color: #2c6573;
         }
 
-        .restart-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px 40px;
-            font-size: 1.1em;
-            margin-top: 20px;
-        }
-
-        .restart-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .difficulty-badge {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.8em;
-            font-weight: bold;
-            margin-left: 10px;
-            color: white;
-        }
-
-        .difficulty-easy {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-        }
-
-        .difficulty-medium {
-            background: linear-gradient(135deg, #f5af19 0%, #f12711 100%);
-        }
-
-        .difficulty-hard {
-            background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);
-        }
-
-        .timer {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #667eea;
-            margin-top: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
+        @media (max-width: 700px) {
+            .quiz-wrapper {
+                padding: 1rem;
             }
 
-            .header h1 {
-                font-size: 1.8em;
+            .q-text {
+                font-size: 1.2rem;
             }
 
-            .question-text {
-                font-size: 1.1em;
-            }
-
-            .navigation {
-                flex-direction: column;
-            }
-
-            button {
-                width: 100%;
+            .stat-value {
+                font-size: 1.4rem;
             }
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🎯 يلا بينا يابطل!</h1>
-            <p>اختبر نفسك في Local Search و Genetic Algorithms</p>
-            <div class="timer">الوقت المتبقي: <span id="timer">--:--</span></div>
+    <div class="quiz-wrapper" id="quizRoot">
+        <div class="quiz-header">
+            <h1>🧠 CSP: CONSTRAINT SATISFACTION<br><span style="font-size:0.85rem;">60 سؤال · إجابات مسلسلة a b c
+                    d</span></h1>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-label">SCORE</div>
+                    <div class="stat-value" id="scoreValue">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">TIME</div>
+                    <div class="stat-value" id="timerValue">00:00</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Q.</div>
+                    <div class="stat-value" id="qCounter">0/60</div>
+                </div>
+            </div>
         </div>
-
         <div class="progress-container">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <div class="progress-text">
-                <span>السؤال <span id="currentQuestion">1</span> من <span id="totalQuestions">50</span></span>
-                <span>النسبة: <span id="progressPercent">0</span>%</span>
-            </div>
+            <div class="progress-fill" id="progressFill"></div>
         </div>
-
-        <div id="questionsContainer"></div>
-
-        <div class="results" id="results">
-            <h2>🎉 اكتملت الاختبار! 🎉</h2>
-            <div class="score" id="finalScore">0%</div>
-            <div class="score-message" id="scoreMessage"></div>
-            <div id="scoreDetails"></div>
-            <button class="restart-btn" onclick="restartQuiz()">إعادة الاختبار</button>
+        <div id="dynamicContent"></div>
+        <div class="nav-buttons">
+            <button id="prevBtn">◀ PREVIOUS</button>
+            <button id="nextBtn">NEXT ▶</button>
+            <button id="resetQuizBtn" class="reset-btn">⟳ RESET ALL</button>
         </div>
-
-        <div class="navigation" id="navigation">
-            <button class="btn-prev" onclick="prevQuestion()" id="prevBtn">← السؤال السابق</button>
-            <button class="btn-next" onclick="nextQuestion()" id="nextBtn">السؤال التالي →</button>
-            <button class="btn-finish" onclick="finishQuiz()" id="finishBtn" disabled>انهي الاختبار ✓</button>
-        </div>
-    </div>
-
-    <div id="translateModal" class="translate-modal">
-        <div class="translate-content">
-            <span class="close" onclick="closeTranslate()">&times;</span>
-            <div id="translateText"></div>
-        </div>
+        <footer>✨ ... ✨</footer>
     </div>
 
     <script>
-        // البيانات الكاملة للأسئلة
-        const questions = [
-            {
-                question: "What is the primary difference between traditional systematic search algorithms and local search algorithms?",
-                options: [
-                    "Local search maintains a complete search tree while systematic search doesn't",
-                    "Local search keeps a single current state and explores neighbors, while systematic search explores entire state spaces systematically",
-                    "Local search is always faster than systematic search",
-                    "There is no difference between them"
-                ],
-                correct: 1,
-                explanation: "Local search algorithms maintain only one or a few current states and explore neighboring states iteratively, unlike systematic search algorithms that maintain and explore entire search trees.",
-                difficulty: "easy",
-                arabicQuestion: "ما الفرق الأساسي بين خوارزميات البحث المنتظم التقليدية وخوارزميات البحث المحلي؟"
-            },
-            {
-                question: "Which of the following is NOT an advantage of local search algorithms?",
-                options: [
-                    "Very little memory consumption",
-                    "No need to maintain a search tree",
-                    "Guarantees finding the global optimum",
-                    "Can find good solutions in large state spaces"
-                ],
-                correct: 2,
-                explanation: "Local search does NOT guarantee finding the global optimum. This is a major limitation - it can get stuck in local maxima/minima.",
-                difficulty: "easy",
-                arabicQuestion: "أي مما يلي ليس ميزة من مزايا خوارزميات البحث المحلي؟"
-            },
-            {
-                question: "In the state space landscape analogy, what does a 'local maximum' represent?",
-                options: [
-                    "A state that is better than all its neighboring states but not the best overall",
-                    "The starting point of the search",
-                    "A state with no neighbors",
-                    "The worst possible state"
-                ],
-                correct: 0,
-                explanation: "A local maximum is a state where no neighboring state has a higher value, but there may be better states elsewhere in the search space.",
-                difficulty: "easy",
-                arabicQuestion: "في تشبيه مشهد فضاء الحالة، ماذا يمثل 'الحد الأقصى المحلي'؟"
-            },
-            {
-                question: "What is hill climbing also known as?",
-                options: [
-                    "Greedy local search",
-                    "Random search",
-                    "Breadth-first search",
-                    "Depth-first search"
-                ],
-                correct: 0,
-                explanation: "Hill climbing is also known as greedy local search because it always moves to the highest-valued neighbor without looking ahead.",
-                difficulty: "easy",
-                arabicQuestion: "ما الاسم الآخر لخوارزمية تسلق التل (Hill Climbing)؟"
-            },
-            {
-                question: "In hill climbing, when does the algorithm terminate?",
-                options: [
-                    "When a goal state is found",
-                    "When it reaches a peak where no neighbor has a higher value",
-                    "After a fixed number of iterations",
-                    "When memory runs out"
-                ],
-                correct: 1,
-                explanation: "Hill climbing terminates when it reaches a peak where no neighbor has a higher value - this could be a local maximum or global maximum.",
-                difficulty: "easy",
-                arabicQuestion: "متى تتوقف خوارزمية تسلق التل عن العمل؟"
-            },
-            {
-                question: "What is the main problem with basic hill climbing?",
-                options: [
-                    "It is too slow",
-                    "It uses too much memory",
-                    "It can get stuck in local maxima",
-                    "It always finds the wrong answer"
-                ],
-                correct: 2,
-                explanation: "The main problem with hill climbing is that it can get stuck in local maxima, especially when the state space landscape has multiple peaks.",
-                difficulty: "medium",
-                arabicQuestion: "ما المشكلة الرئيسية لخوارزمية تسلق التل الأساسية؟"
-            },
-            {
-                question: "What are 'sideways moves' in hill climbing?",
-                options: [
-                    "Moving to neighboring states with the same value to escape plateaux",
-                    "Moving backward to the previous state",
-                    "Jumping randomly to distant states",
-                    "Staying in the current state"
-                ],
-                correct: 0,
-                explanation: "Sideways moves allow hill climbing to escape from plateaux by allowing moves to neighbors with the same value as the current state.",
-                difficulty: "medium",
-                arabicQuestion: "ما هي 'الحركات الجانبية' في خوارزمية تسلق التل؟"
-            },
-            {
-                question: "How does random-restart help overcome local maxima?",
-                options: [
-                    "It restarts the search from different random initial states multiple times",
-                    "It changes the fitness function",
-                    "It explores the entire state space",
-                    "It uses parallel processing"
-                ],
-                correct: 0,
-                explanation: "Random-restart repeatedly runs hill climbing from different random starting states, increasing the chance of finding the global maximum.",
-                difficulty: "medium",
-                arabicQuestion: "كيف يساعد 'إعادة البدء العشوائية' في التغلب على الحدود القصوى المحلية؟"
-            },
-            {
-                question: "What is stochastic hill climbing?",
-                options: [
-                    "Hill climbing that chooses at random among uphill moves",
-                    "Hill climbing that always moves to the best neighbor",
-                    "Hill climbing that never moves uphill",
-                    "Hill climbing that uses only one state"
-                ],
-                correct: 0,
-                explanation: "Stochastic hill climbing randomly selects among the uphill moves rather than always choosing the steepest ascent.",
-                difficulty: "medium",
-                arabicQuestion: "ما هي خوارزمية تسلق التل العشوائية (Stochastic Hill Climbing)؟"
-            },
-            {
-                question: "How does local beam search differ from standard hill climbing?",
-                options: [
-                    "It maintains only one state instead of multiple states",
-                    "It maintains k states instead of one state",
-                    "It uses more memory but explores only one direction",
-                    "It guarantees finding the global optimum"
-                ],
-                correct: 1,
-                explanation: "Local beam search maintains k best states instead of just one, allowing useful information to be shared among multiple search branches.",
-                difficulty: "medium",
-                arabicQuestion: "كيف يختلف البحث المحلي بالشعاع عن تسلق التل القياسي؟"
-            },
-            {
-                question: "What is the purpose of the fitness function in genetic algorithms?",
-                options: [
-                    "To generate new states randomly",
-                    "To evaluate how good a state is",
-                    "To perform crossover operations",
-                    "To terminate the algorithm"
-                ],
-                correct: 1,
-                explanation: "The fitness function evaluates the quality of each individual state. Better states have higher fitness values.",
-                difficulty: "easy",
-                arabicQuestion: "ما الغرض من دالة اللياقة (Fitness Function) في الخوارزميات الجينية؟"
-            },
-            {
-                question: "Genetic algorithms are inspired by which biological process?",
-                options: [
-                    "Photosynthesis",
-                    "Natural selection and evolution",
-                    "Cell division",
-                    "Protein synthesis"
-                ],
-                correct: 1,
-                explanation: "Genetic algorithms are inspired by natural selection and evolutionary processes in biology.",
-                difficulty: "easy",
-                arabicQuestion: "تستلهم الخوارزميات الجينية من أي عملية بيولوجية؟"
-            },
-            {
-                question: "In genetic algorithms, what is the initial set of random states called?",
-                options: [
-                    "Generation",
-                    "Chromosome",
-                    "Population",
-                    "Individual"
-                ],
-                correct: 2,
-                explanation: "The initial k randomly generated states in genetic algorithms are called the population. Each state is called an individual.",
-                difficulty: "easy",
-                arabicQuestion: "ما اسم المجموعة الأولية من الحالات العشوائية في الخوارزميات الجينية؟"
-            },
-            {
-                question: "How are individuals typically represented in genetic algorithms?",
-                options: [
-                    "As graphs",
-                    "As trees",
-                    "As strings of 0s and 1s or digits",
-                    "As matrices"
-                ],
-                correct: 2,
-                explanation: "Individuals in genetic algorithms are usually represented as strings of 0s and 1s (binary strings) or strings of digits from a finite set.",
-                difficulty: "easy",
-                arabicQuestion: "كيف يتم تمثيل الأفراد عادة في الخوارزميات الجينية؟"
-            },
-            {
-                question: "What is the 8-queens problem example used to demonstrate in genetic algorithms?",
-                options: [
-                    "How to solve logic puzzles",
-                    "How to represent individuals as digit strings and calculate fitness functions",
-                    "How to perform memory management",
-                    "How to optimize database queries"
-                ],
-                correct: 1,
-                explanation: "The 8-queens problem is used as an example to show how to represent a solution as a string of digits and calculate fitness based on non-attacking queen pairs.",
-                difficulty: "medium",
-                arabicQuestion: "ما الذي يُستخدم مثال مسألة الثماني ملكات لعرضه في الخوارزميات الجينية؟"
-            },
-            {
-                question: "In the 8-queens genetic algorithm example, what is the fitness value of a perfect solution?",
-                options: [
-                    "8",
-                    "16",
-                    "28",
-                    "64"
-                ],
-                correct: 2,
-                explanation: "The fitness is the number of non-attacking queen pairs. With 8 queens: 7+6+5+4+3+2+1 = 28.",
-                difficulty: "medium",
-                arabicQuestion: "في مثال الخوارزمية الجينية لمسألة الثماني ملكات، ما قيمة اللياقة للحل المثالي؟"
-            },
-            {
-                question: "What is crossover in genetic algorithms?",
-                options: [
-                    "Combining two parent individuals to create offspring",
-                    "Modifying a single individual randomly",
-                    "Selecting the best individual",
-                    "Removing the worst individuals"
-                ],
-                correct: 0,
-                explanation: "Crossover is an operation that combines genetic material from two parent individuals to create offspring by crossing at a randomly chosen point.",
-                difficulty: "medium",
-                arabicQuestion: "ما هي عملية التقاطع (Crossover) في الخوارزميات الجينية؟"
-            },
-            {
-                question: "What is a crossover point in genetic algorithms?",
-                options: [
-                    "The location in the parent string where offspring are created",
-                    "The fitness threshold",
-                    "The point where mutation occurs",
-                    "The end of the string"
-                ],
-                correct: 0,
-                explanation: "A crossover point is a randomly chosen location in the parent strings where genetic material is exchanged to create offspring.",
-                difficulty: "medium",
-                arabicQuestion: "ما هي نقطة التقاطع في الخوارزميات الجينية؟"
-            },
-            {
-                question: "What is mutation in genetic algorithms?",
-                options: [
-                    "Crossing two parent individuals",
-                    "Random modification of elements in a string with small probability",
-                    "Selecting the best individuals",
-                    "Removing poor individuals"
-                ],
-                correct: 1,
-                explanation: "Mutation is a genetic operator that randomly changes elements in an individual's string with a small probability to introduce variation.",
-                difficulty: "medium",
-                arabicQuestion: "ما هي الطفرة (Mutation) في الخوارزميات الجينية؟"
-            },
-            {
-                question: "How are parent individuals selected for reproduction in genetic algorithms?",
-                options: [
-                    "Always the first individuals",
-                    "At random with respect to their fitness values",
-                    "Always the best individuals",
-                    "In fixed order"
-                ],
-                correct: 1,
-                explanation: "Pairs of individuals are selected at random for reproduction with probabilities related to their fitness values - better individuals have higher selection probability.",
-                difficulty: "medium",
-                arabicQuestion: "كيف يتم اختيار الأفراد الآباء للتكاثر في الخوارزميات الجينية؟"
-            },
-            {
-                question: "What is stochastic beam search?",
-                options: [
-                    "A variant of local beam search that chooses k successors randomly",
-                    "A variant that maintains only one state",
-                    "A variant that explores the entire state space",
-                    "A variant that uses parallel processing"
-                ],
-                correct: 0,
-                explanation: "Stochastic beam search is a variant of local beam search that chooses k successors in a random way rather than selecting the k best deterministically.",
-                difficulty: "medium",
-                arabicQuestion: "ما هو البحث بالشعاع العشوائي (Stochastic Beam Search)؟"
-            },
-            {
-                question: "Why is stochastic beam search useful?",
-                options: [
-                    "It always finds the optimal solution",
-                    "It helps alleviate the problem of states clustering around the same region",
-                    "It uses less memory than other methods",
-                    "It is faster than deterministic methods"
-                ],
-                correct: 1,
-                explanation: "Stochastic beam search helps prevent all k states from clustering around the same region of the state space by introducing randomness in successor selection.",
-                difficulty: "medium",
-                arabicQuestion: "لماذا يكون البحث بالشعاع العشوائي مفيداً؟"
-            },
-            {
-                question: "What is the relationship between genetic algorithms and stochastic beam search?",
-                options: [
-                    "They are identical",
-                    "Genetic algorithms are a variant of stochastic beam search",
-                    "Stochastic beam search is a variant of genetic algorithms",
-                    "They have no relationship"
-                ],
-                correct: 1,
-                explanation: "Genetic algorithms are a variant of stochastic beam search that generates successors by combining two parents rather than modifying a single state.",
-                difficulty: "hard",
-                arabicQuestion: "ما العلاقة بين الخوارزميات الجينية والبحث بالشعاع العشوائي؟"
-            },
-            {
-                question: "Which type of problem is local search most suitable for?",
-                options: [
-                    "Problems requiring a specific sequence of actions",
-                    "Pure optimization problems where only the final state matters",
-                    "Problems with very small state spaces",
-                    "Problems that must explore the entire state space"
-                ],
-                correct: 1,
-                explanation: "Local search is most suitable for optimization problems where the path doesn't matter and only the quality of the final state is important.",
-                difficulty: "medium",
-                arabicQuestion: "ما نوع المشكلة التي يناسبها البحث المحلي أكثر؟"
-            },
-            {
-                question: "What happens in hill climbing when the current state and its best neighbor have the same value?",
-                options: [
-                    "The algorithm always moves to that neighbor",
-                    "The algorithm stays in the current state and terminates",
-                    "The algorithm performs a sideways move if that option is enabled",
-                    "The algorithm randomly chooses direction"
-                ],
-                correct: 2,
-                explanation: "When no neighbor is better (plateau situation), basic hill climbing terminates unless sideways moves are enabled to escape plateaux.",
-                difficulty: "hard",
-                arabicQuestion: "ماذا يحدث في تسلق التل عندما يكون للحالة الحالية وأفضل جار لها نفس القيمة؟"
-            },
-            {
-                question: "How many states does basic hill climbing maintain during search?",
-                options: [
-                    "All explored states",
-                    "A complete search tree",
-                    "Only the current state",
-                    "k best states"
-                ],
-                correct: 2,
-                explanation: "Basic hill climbing maintains only one current state, which is why it uses very little memory compared to systematic search algorithms.",
-                difficulty: "easy",
-                arabicQuestion: "كم عدد الحالات التي تحتفظ بها خوارزمية تسلق التل الأساسية أثناء البحث؟"
-            },
-            {
-                question: "What is the main advantage of genetic algorithms over simple hill climbing?",
-                options: [
-                    "They use less memory",
-                    "They are faster",
-                    "They can explore multiple promising regions simultaneously through population-based search",
-                    "They always find the global optimum"
-                ],
-                correct: 2,
-                explanation: "Genetic algorithms maintain a population of states, allowing exploration of multiple promising regions simultaneously, unlike single-state hill climbing.",
-                difficulty: "hard",
-                arabicQuestion: "ما الميزة الرئيسية للخوارزميات الجينية على تسلق التل البسيط؟"
-            },
-            {
-                question: "In the context of real-world problems, why is local search often practical?",
-                options: [
-                    "Because all real problems have unique solutions",
-                    "Because good solutions are often sufficient, even if not globally optimal",
-                    "Because it is always faster than any other method",
-                    "Because it guarantees finding the best solution"
-                ],
-                correct: 1,
-                explanation: "In many real-world problems, finding a good solution quickly is more practical than guaranteeing the globally optimal solution.",
-                difficulty: "hard",
-                arabicQuestion: "لماذا يكون البحث المحلي عملياً في سياق المشاكل الحقيقية؟"
-            },
-            {
-                question: "What is the 'no free lunch' theorem in the context of optimization?",
-                options: [
-                    "All optimization algorithms have the same performance on average",
-                    "No single algorithm works best for all problems",
-                    "Optimization always requires free resources",
-                    "All algorithms are equally bad"
-                ],
-                correct: 1,
-                explanation: "The no free lunch theorem suggests that no single optimization algorithm performs best on all problem types - algorithm selection depends on the specific problem.",
-                difficulty: "hard",
-                arabicQuestion: "ما نظرية 'لا غداء مجاني' في سياق التحسين؟"
-            },
-            {
-                question: "How does the fitness function for the 8-queens problem count non-attacking pairs?",
-                options: [
-                    "Only horizontal attacks",
-                    "Only vertical attacks",
-                    "All pairs of queens that don't attack each other (not on same row, column, or diagonal)",
-                    "Queens at specific positions"
-                ],
-                correct: 2,
-                explanation: "The fitness function counts pairs of queens that cannot attack each other - they must not share a row, column, or diagonal.",
-                difficulty: "medium",
-                arabicQuestion: "كيف تحسب دالة اللياقة لمسألة الثماني ملكات الأزواج غير المتعارضة؟"
-            },
-            {
-                question: "What is a 'shoulder' in state space landscape terminology?",
-                options: [
-                    "A peak at the top of a mountain",
-                    "A plateau leading to a peak where hill climbing can escape",
-                    "A valley between two peaks",
-                    "The flat region at the bottom"
-                ],
-                correct: 1,
-                explanation: "A shoulder is a region where the landscape slopes upward to a local maximum, representing an escape route from a plateau.",
-                difficulty: "hard",
-                arabicQuestion: "ما هو 'الكتف' في مصطلحات فضاء الحالة؟"
-            },
-            {
-                question: "When would local beam search with k=1 be identical to hill climbing?",
-                options: [
-                    "Always",
-                    "Never",
-                    "When the problem is convex",
-                    "When k equals the number of states"
-                ],
-                correct: 0,
-                explanation: "Local beam search with k=1 (maintaining only one best state) is functionally equivalent to hill climbing.",
-                difficulty: "medium",
-                arabicQuestion: "متى يكون البحث المحلي بالشعاع مع k=1 مطابقاً لتسلق التل؟"
-            },
-            {
-                question: "What is the significance of the population size in genetic algorithms?",
-                options: [
-                    "Larger populations guarantee better solutions",
-                    "Smaller populations are always better",
-                    "It affects the diversity of search and computational cost",
-                    "It has no effect on performance"
-                ],
-                correct: 2,
-                explanation: "Population size in genetic algorithms affects both the diversity of the search (larger = more diverse) and the computational cost per generation.",
-                difficulty: "hard",
-                arabicQuestion: "ما أهمية حجم السكان في الخوارزميات الجينية؟"
-            },
-            {
-                question: "Which statement about local optima is true?",
-                options: [
-                    "A local optimum is always a global optimum",
-                    "Local optima can be the same as global optima in some cases",
-                    "Local optima are always worse than global optima",
-                    "There are no local optima in real problems"
-                ],
-                correct: 1,
-                explanation: "A local optimum can be the global optimum, but not necessarily. In problems with multiple peaks, some local optima may be far from the global optimum.",
-                difficulty: "medium",
-                arabicQuestion: "أي العبارات التالية عن الحد الأقصى المحلي صحيحة؟"
-            },
-            {
-                question: "What is the computational complexity advantage of local search?",
-                options: [
-                    "O(n!) time",
-                    "O(n²) space for maintaining search tree",
-                    "O(1) or O(n) space since it doesn't maintain a full search tree",
-                    "No advantage in complexity"
-                ],
-                correct: 2,
-                explanation: "Local search has a major space complexity advantage since it maintains only one or few states rather than a complete search tree.",
-                difficulty: "hard",
-                arabicQuestion: "ما ميزة التعقيد الحسابي للبحث المحلي؟"
-            },
-            {
-                question: "In genetic algorithms, what does 'selection pressure' refer to?",
-                options: [
-                    "The pressure exerted on states",
-                    "How strongly better individuals are favored for reproduction",
-                    "The number of mutations per generation",
-                    "The crossover rate"
-                ],
-                correct: 1,
-                explanation: "Selection pressure refers to how much better individuals are preferentially chosen for reproduction. Higher pressure means better individuals have much higher selection probability.",
-                difficulty: "hard",
-                arabicQuestion: "ما الذي تشير إليه 'ضغط الاختيار' في الخوارزميات الجينية؟"
-            },
-            {
-                question: "What is the exploration-exploitation trade-off in local search?",
-                options: [
-                    "Exploring new states vs. exploiting good states",
-                    "Finding solutions quickly vs. finding optimal solutions",
-                    "Using more memory vs. using less memory",
-                    "Parallel search vs. sequential search"
-                ],
-                correct: 0,
-                explanation: "The trade-off is between exploring new regions of the state space (exploration) and intensively searching around good solutions (exploitation).",
-                difficulty: "hard",
-                arabicQuestion: "ما مقايضة الاستكشاف والاستغلال في البحث المحلي؟"
-            },
-            {
-                question: "How does simulated annealing relate to local search?",
-                options: [
-                    "It is not related to local search",
-                    "It is a local search variant that accepts worse moves with decreasing probability",
-                    "It replaces local search entirely",
-                    "It is only for continuous optimization"
-                ],
-                correct: 1,
-                explanation: "Simulated annealing is a local search algorithm inspired by statistical physics that accepts worse moves with decreasing probability to escape local optima.",
-                difficulty: "hard",
-                arabicQuestion: "كيف يرتبط التلدين المحاكى بالبحث المحلي؟"
-            },
-            {
-                question: "What problem types are most suitable for genetic algorithms?",
-                options: [
-                    "Only small problems",
-                    "Only linear problems",
-                    "Complex optimization problems with large search spaces and non-convex landscapes",
-                    "Only discrete optimization"
-                ],
-                correct: 2,
-                explanation: "Genetic algorithms excel at complex optimization problems with large search spaces and non-smooth landscapes where gradient-based methods fail.",
-                difficulty: "hard",
-                arabicQuestion: "ما أنواع المشاكل الأكثر ملاءمة للخوارزميات الجينية؟"
-            },
-            {
-                question: "In genetic algorithms, how does elitism help?",
-                options: [
-                    "It removes the best individuals",
-                    "It preserves the best individuals across generations",
-                    "It increases mutation rate",
-                    "It reduces population size"
-                ],
-                correct: 1,
-                explanation: "Elitism preserves the best individuals from one generation to the next, ensuring that the best solutions found are not lost.",
-                difficulty: "medium",
-                arabicQuestion: "كيف يساعد الانتقائية في الخوارزميات الجينية؟"
-            },
-            {
-                question: "What is the main difference between hill climbing and local beam search in terms of search strategy?",
-                options: [
-                    "Hill climbing uses random moves while beam search is deterministic",
-                    "Hill climbing maintains one state while beam search maintains multiple states",
-                    "They are identical in strategy",
-                    "Beam search always finds the optimum"
-                ],
-                correct: 1,
-                explanation: "The key difference is that hill climbing focuses on one current state while local beam search maintains k best states simultaneously.",
-                difficulty: "medium",
-                arabicQuestion: "ما الفرق الرئيسي بين تسلق التل والبحث بالشعاع المحلي من حيث استراتيجية البحث؟"
-            },
-            {
-                question: "How would you modify hill climbing to improve its success rate on problems with many local optima?",
-                options: [
-                    "Increase the state space",
-                    "Use random-restart with multiple trials and select the best solution",
-                    "Always move downhill instead of uphill",
-                    "Use only one iteration"
-                ],
-                correct: 1,
-                explanation: "Random-restart repeatedly runs hill climbing from different random starting points, increasing the probability of finding a good solution.",
-                difficulty: "hard",
-                arabicQuestion: "كيف يمكنك تعديل تسلق التل لتحسين معدل نجاحه على المشاكل ذات الحدود القصوى المحلية الكثيرة؟"
-            },
-            {
-                question: "What is the difference between a 'flat' local maximum and a regular local maximum?",
-                options: [
-                    "They are the same thing",
-                    "A flat local maximum has neighbors with equal value while a regular maximum has lower neighbors",
-                    "A flat maximum is always higher",
-                    "There is no difference in optimization"
-                ],
-                correct: 1,
-                explanation: "A flat local maximum (plateau) has neighbors with equal value, making it harder for standard hill climbing to escape compared to a regular local maximum.",
-                difficulty: "hard",
-                arabicQuestion: "ما الفرق بين 'الحد الأقصى المحلي المسطح' والحد الأقصى المحلي العادي؟"
-            },
-            {
-                question: "In the context of the 8-queens problem, why is genetic algorithms a good choice?",
-                options: [
-                    "Because it is the only algorithm that works",
-                    "Because the problem has a large search space (8^8 = 16,777,216 possibilities) and many local optima",
-                    "Because it is faster than hill climbing",
-                    "Because the problem is linear"
-                ],
-                correct: 1,
-                explanation: "The 8-queens problem has a huge search space and many local optima, making population-based genetic algorithms suitable for finding good solutions.",
-                difficulty: "hard",
-                arabicQuestion: "لماذا تكون الخوارزميات الجينية خياراً جيداً في سياق مسألة الثماني ملكات؟"
-            },
-            {
-                question: "What is a 'generation' in genetic algorithms?",
-                options: [
-                    "A single individual",
-                    "One complete iteration of the algorithm where new population is created",
-                    "The entire population",
-                    "A fitness value"
-                ],
-                correct: 1,
-                explanation: "A generation in genetic algorithms is one complete iteration where individuals are selected, crossed over, mutated, and a new population is created.",
-                difficulty: "easy",
-                arabicQuestion: "ما هو 'الجيل' في الخوارزميات الجينية؟"
-            },
-            {
-                question: "How does the mutation rate affect genetic algorithm performance?",
-                options: [
-                    "Higher mutation always gives better results",
-                    "Lower mutation always gives better results",
-                    "It provides a balance - too low loses diversity, too high disrupts good solutions",
-                    "Mutation rate has no effect"
-                ],
-                correct: 2,
-                explanation: "Mutation rate must be balanced: low rates lose genetic diversity and get stuck; high rates disrupt good solutions and become like random search.",
-                difficulty: "hard",
-                arabicQuestion: "كيف يؤثر معدل الطفرة على أداء الخوارزمية الجينية؟"
-            },
-            {
-                question: "What is the role of diversity in genetic algorithms?",
-                options: [
-                    "To guarantee finding the optimal solution",
-                    "To maintain variety in the population to prevent premature convergence",
-                    "To slow down the algorithm",
-                    "Diversity is not important"
-                ],
-                correct: 1,
-                explanation: "Diversity in the population is crucial to prevent premature convergence to suboptimal solutions and to explore different regions of the search space.",
-                difficulty: "hard",
-                arabicQuestion: "ما دور التنوع في الخوارزميات الجينية؟"
-            },
-            {
-                question: "In what scenario would simple hill climbing outperform genetic algorithms?",
-                options: [
-                    "Never - genetic algorithms are always better",
-                    "When the problem has a smooth, unimodal landscape with a single peak",
-                    "When memory is unlimited",
-                    "When time is not a concern"
-                ],
-                correct: 1,
-                explanation: "On smooth, unimodal landscapes with a single global optimum, simple hill climbing is faster and more efficient than genetic algorithms.",
-                difficulty: "hard",
-                arabicQuestion: "في أي سيناريو ستتفوق خوارزمية تسلق التل البسيطة على الخوارزميات الجينية؟"
-            },
-            {
-                question: "What is convergence in the context of genetic algorithms?",
-                options: [
-                    "The population moving toward a single solution or region",
-                    "The population becoming more diverse",
-                    "The algorithm terminating",
-                    "Finding the global optimum"
-                ],
-                correct: 0,
-                explanation: "Convergence in genetic algorithms refers to the population becoming more homogeneous, focusing on promising regions - premature convergence can be problematic.",
-                difficulty: "hard",
-                arabicQuestion: "ما هو التقارب في سياق الخوارزميات الجينية؟"
-            },
-            {
-                question: "How are negative fitness values typically handled in genetic algorithms?",
-                options: [
-                    "They are ignored",
-                    "They are converted to positive values through scaling or shifting",
-                    "The algorithm terminates",
-                    "They are multiplied by -1"
-                ],
-                correct: 1,
-                explanation: "Negative fitness values are typically converted to positive values through scaling or shifting so selection probabilities can be calculated properly.",
-                difficulty: "hard",
-                arabicQuestion: "كيف يتم التعامل عادة مع قيم اللياقة السالبة في الخوارزميات الجينية؟"
-            },
-            {
-                question: "What makes local search practical for continuous optimization problems?",
-                options: [
-                    "It doesn't work for continuous problems",
-                    "It can approximate derivatives and work with gradient information",
-                    "It only works for discrete problems",
-                    "Continuous problems cannot be optimized"
-                ],
-                correct: 1,
-                explanation: "Local search can handle continuous optimization by approximating derivatives or using gradient information to navigate the continuous state space.",
-                difficulty: "hard",
-                arabicQuestion: "ما الذي يجعل البحث المحلي عملياً لمسائل التحسين المستمرة؟"
-            },
-            {
-                question: "In real-world applications like circuit design, why is local search preferred over systematic search?",
-                options: [
-                    "Because circuit design has small state spaces",
-                    "Because systematic search is impossible for extremely large state spaces, and local search finds good solutions efficiently",
-                    "Because local search always finds the optimal design",
-                    "Because circuit design doesn't require optimization"
-                ],
-                correct: 1,
-                explanation: "In circuit design, the state space is astronomically large, making systematic search infeasible. Local search can find good solutions quickly with minimal memory.",
-                difficulty: "hard",
-                arabicQuestion: "لماذا يفضل البحث المحلي على البحث المنتظم في التطبيقات الحقيقية مثل تصميم الدوائر؟"
-            },
-            {
-                question: "What is the expected solution quality difference between hill climbing and genetic algorithms?",
-                options: [
-                    "Hill climbing always finds better solutions",
-                    "Genetic algorithms always find better solutions",
-                    "On complex problems, genetic algorithms typically find better solutions but at higher computational cost",
-                    "There is no difference"
-                ],
-                correct: 2,
-                explanation: "On complex multi-modal problems, genetic algorithms typically find better solutions due to population-based search, but require more computation.",
-                difficulty: "hard",
-                arabicQuestion: "ما الفرق المتوقع في جودة الحل بين تسلق التل والخوارزميات الجينية؟"
-            },
-            {
-                question: "How can you ensure that a genetic algorithm explores the entire search space?",
-                options: [
-                    "You cannot guarantee this",
-                    "By setting mutation rate to 1.0 (100%)",
-                    "By making crossover rate 0",
-                    "By using only one individual"
-                ],
-                correct: 0,
-                explanation: "You cannot guarantee complete exploration of the search space with genetic algorithms - they use probabilistic sampling which may miss regions.",
-                difficulty: "hard",
-                arabicQuestion: "كيف يمكنك التأكد من أن الخوارزمية الجينية تستكشف كامل فضاء البحث؟"
-            },
-            {
-                question: "What is the primary limitation of local search algorithms compared to complete search methods?",
-                options: [
-                    "They use more memory",
-                    "They are slower",
-                    "They don't guarantee finding the global optimum and may get stuck in local optima",
-                    "They only work on discrete problems"
-                ],
-                correct: 2,
-                explanation: "The primary limitation is that local search algorithms don't guarantee finding the global optimum - they may terminate at a local optimum.",
-                difficulty: "easy",
-                arabicQuestion: "ما هو الحد الأساسي لخوارزميات البحث المحلي مقارنة بطرق البحث الكاملة؟"
-            }
+        // ------------------- نمط الإجابات المسلسل حسب الطلب -----------------
+        // النمط المطلوب: 2 إجابات a، ثم 1 b، ثم 3 d، ثم 2 c
+        // ثم نكرر بأنماط متنوعة طول الـ 60 سؤال
+        const answerPattern = [
+            // 1-8:  2a,1b,3d,2c
+            'a', 'a', 'b', 'd', 'd', 'd', 'c', 'c',
+            // 9-15: 1a,2b,1c,1d
+            'a', 'b', 'b', 'c', 'd',
+            // 16-22: 2a,2b,1c, (2)
+            'a', 'a', 'b', 'b', 'c',
+            // 23-28: 1d,2a,1b
+            'd', 'a', 'a', 'b',
+            // 29-35: 2c,1d,2a
+            'c', 'c', 'd', 'a', 'a',
+            // 36-42: 1b,2d,1c,1a
+            'b', 'd', 'd', 'c', 'a',
+            // 43-49: 2b,1c,2d
+            'b', 'b', 'c', 'd', 'd',
+            // 50-55: 1a,2b,1c
+            'a', 'b', 'b', 'c',
+            // 56-60: 2d,1a,2c (آخر 5)
+            'd', 'd', 'a', 'c', 'c'
+        ];
+        // التأكد من أن الطول 60
+        while (answerPattern.length < 60) answerPattern.push('a');
+        while (answerPattern.length > 60) answerPattern.pop();
+
+        // تحويل الحروف إلى indices (0=a,1=b,2=c,3=d)
+        const correctIndices = answerPattern.map(letter => {
+            if (letter === 'a') return 0;
+            if (letter === 'b') return 1;
+            if (letter === 'c') return 2;
+            return 3; // d
+        });
+
+        // بناء الأسئلة مع الإجابات الصحيحة وفق النمط المطلوب
+        const baseQuestions = [
+            { text: "What are the three core components of a Constraint Satisfaction Problem (CSP)?", options: ["States, actions, goal test", "Variables, domains, constraints", "Nodes, edges, paths", "Heuristics, pruning, backtracking"], explanation: "CSP is formally: set of variables X, each with domain D_i, and constraints C specifying allowable combinations." },
+            { text: "In CSPs, a state is defined by:", options: ["A path cost function", "A black box data structure", "Variables assigned values from domains", "Only unary constraints"], explanation: "Unlike generic search, CSP states are assignments of values to some/all variables from their domains." },
+            { text: "Which of the following is an example of a real-world CSP?", options: ["Finding prime numbers", "Timetabling / exam scheduling", "Sorting an array", "Compiling source code"], explanation: "Timetabling, assignment, floor planning, scheduling are classic CSP applications." },
+            { text: "In a binary CSP, each constraint relates:", options: ["Exactly one variable", "At most two variables", "At least three variables", "All variables globally"], explanation: "Binary CSP: each constraint involves ≤2 variables, represented as arcs in constraint graph." },
+            { text: "Constraint graph in binary CSP has:", options: ["Variables as arcs and constraints as nodes", "Variables as nodes, constraints as arcs", "Domains as nodes", "Values as edges"], explanation: "Nodes = variables, arcs = binary constraints." },
+            { text: "A complete assignment in a CSP with n variables each of domain size d has how many possible assignments?", options: ["n*d", "d^n", "n^d", "d*n"], explanation: "There are d choices per variable → total assignments = d^n." },
+            { text: "Which search algorithm is the foundation for solving CSPs by assigning one variable at a time?", options: ["Breadth-first search", "Depth-first search with backtracking", "A* search", "Hill climbing"], explanation: "Backtracking = DFS that assigns one variable per node & backtracks on constraint violation." },
+            { text: "In backtracking search for CSP, assignments are commutative. This means:", options: ["Order of variable assignment does not matter", "Domains are commutative", "Constraints are symmetric", "Values can be swapped"], explanation: "Commutativity allows us to fix an ordering and assign one variable at a time." },
+            { text: "MRV heuristic stands for:", options: ["Most Relevant Variable", "Minimum Remaining Values", "Maximum Range Value", "Minimum Recursive Validation"], explanation: "MRV chooses variable with fewest legal values – 'most constrained variable' heuristic." },
+            { text: "Least Constraining Value (LCV) heuristic aims to:", options: ["Pick value that rules out fewest values for neighbors", "Pick the largest domain", "Pick value used most often", "Randomize choice"], explanation: "LCV leaves maximum flexibility for remaining unassigned variables." },
+            { text: "Forward checking in CSP does what?", options: ["Checks all future constraints", "After assigning a variable, removes inconsistent values from neighbors' domains", "Only checks unary constraints", "Performs arc consistency on whole graph"], explanation: "FC keeps track of legal values for unassigned variables & stops when any domain becomes empty." },
+            { text: "Arc consistency for a directed arc (X→Y) means:", options: ["Every value of X has a support in Y", "Domains of X and Y are equal", "X's domain size = Y's domain size", "No constraints between X and Y"], explanation: "∀x∈D_X ∃y∈D_Y such that constraint (X,Y) satisfied." },
+            { text: "The AC-3 algorithm maintains a queue of arcs and calls which function to revise domains?", options: ["REVISE", "PRUNE", "CONSIST", "FILTER"], explanation: "AC-3 uses REVISE(csp,X,Y) to remove inconsistent values from X.domain." },
+            { text: "Node consistency removes values violating:", options: ["Binary constraints", "Unary constraints", "Global constraints", "Path constraints"], explanation: "Node-consistent if all values satisfy unary constraints on that variable." },
+            { text: "If after arc consistency a variable's domain becomes empty, the CSP is:", options: ["Unsatisfiable", "Satisfiable with many solutions", "Needs backtracking", "Trivially solved"], explanation: "Empty domain → no possible value → no solution." },
+            { text: "In the map coloring example (Australia), variables are regions and domains are {red, green, blue}. Constraint: adjacent regions must have different colors. What type of constraint?", options: ["Global all-different", "Binary inequality constraint", "Unary constraint", "Soft constraint"], explanation: "Each adjacency like WA≠NT is binary inequality." },
+            { text: "Tasmania in Australian map coloring is an independent subproblem because:", options: ["No constraints with mainland", "It has only one color", "It has the smallest domain", "It's unconnected"], explanation: "Tasmania has no edges to other variables → solved separately." },
+            { text: "Sudoku can be formulated as a CSP with what kind of global constraint?", options: ["All-different on rows, columns, boxes", "Sum constraints", "Equality constraints", "Path consistency"], explanation: "Every row/column/box must have distinct values (all-different)." },
+            { text: "Infinite domain CSPs (e.g., job scheduling with T1 + d ≤ T2) are often solved using:", options: ["Constraint language and linear programming", "Exhaustive enumeration", "Only heuristics", "Forward checking alone"], explanation: "Infinite domains require constraint languages and OR techniques." },
+            { text: "Soft constraints / preferences are represented as:", options: ["Cost functions", "Hard binary constraints", "Equality constraints", "Node consistency"], explanation: "Preferences assign costs → constrained optimization." },
+            { text: "Which is NOT a typical improvement over basic backtracking?", options: ["MRV", "LCV", "Forward Checking", "Bidirectional search"], explanation: "Bidirectional search not typical for CSP; common: MRV, LCV, FC, propagation." },
+            { text: "What does SELECT-UNASSIGNED-VARIABLE in backtracking do?", options: ["Chooses next variable using heuristics like MRV", "Assigns random variable", "Picks variable with max domain", "Selects constrained value"], explanation: "Selects variable (often MRV or degree heuristic)." },
+            { text: "Degree heuristic for variable selection picks:", options: ["Variable with largest number of constraints with other unassigned variables", "Smallest domain", "Most common value", "Random"], explanation: "Degree: choose variable involved in most constraints to reduce branching." },
+            { text: "If a CSP is tree-structured (constraint graph is a tree), it can be solved in:", options: ["Linear time", "Exponential time", "Polynomial with high degree", "NP-hard"], explanation: "Tree-structured CSPs solved in O(nd²) via directed arc consistency." },
+            { text: "Which algorithm achieves arc consistency in CSP?", options: ["AC-3", "DPLL", "FC", "Min-conflicts"], explanation: "AC-3 is the standard for binary CSP arc consistency." },
+            { text: "Path consistency generalizes arc consistency to:", options: ["Three or more variables", "Only unary constraints", "Continuous domains", "Preferences"], explanation: "Path consistency considers triples of variables." },
+            { text: "CSPs differ from standard search problems because in CSPs:", options: ["We care about the goal state itself, not the path", "Paths have different costs", "Actions have costs", "State space is infinite"], explanation: "We need the satisfying assignment (goal state) not sequence of actions." },
+            { text: "In the CSP formulation of exam scheduling (variables: courses, days {Mon,Tue,Wed}), constraint A≠B means:", options: ["Courses A and B cannot be same day", "They must be same day", "A after B", "B before A"], explanation: "A≠B forces different exam slots." },
+            { text: "A constraint (A≠Mon, B≠Tue, A≠B) after node consistency on A with A≠Mon will:", options: ["Remove Mon from A's domain", "Remove Tue from B", "Remove Wed from A", "Nothing"], explanation: "Node consistency removes Mon from A domain." },
+            { text: "What is the role of constraint propagation in CSP solvers?", options: ["Inference that reduces domains using constraints", "Generating random assignments", "Ordering variables", "Path cost calculation"], explanation: "Propagation (like arc consistency) reduces search space by pruning." },
+            { text: "Which of the following is a global constraint?", options: ["AllDiff", "X≠Y", "X>Y", "X=Y"], explanation: "AllDiff involves many variables (must be all different)." },
+            { text: "Backtracking search with forward checking detects inconsistency when:", options: ["Any variable loses all values in its domain", "Goal test fails", "Leaf node reached", "Assignment complete"], explanation: "FC stops branch as soon as any unassigned variable empty domain." },
+            { text: "In the REVISE procedure (X→Y), if no y in Y.domain supports a given x, what happens?", options: ["x is removed from X.domain", "Y is removed", "Constraint is deleted", "X and Y swapped"], explanation: "REVISE removes unsupported values to enforce arc consistency." },
+            { text: "A CSP solver with only backtracking and no inference may suffer from:", options: ["Thrashing", "Polynomial complexity", "Optimality", "No failure detection"], explanation: "Without propagation, backtracking repeatedly fails on same reasons (thrashing)." },
+            { text: "Which search method explores partial assignments with one variable at a time and backtracks when constraint violated?", options: ["Backtracking DFS", "BFS with pruning", "Iterative deepening", "Simulated annealing"], explanation: "Standard CSP solving approach." },
+            { text: "What is the complexity of AC-3 for binary CSP with n variables, domain size d, and c constraints?", options: ["O(c d^3)", "O(n^2 d^2)", "O(2^n)", "O(d^n)"], explanation: "AC-3 worst-case O(cd³)." },
+            { text: "If a graph is not tree-structured but we can perform tree decomposition, we can solve it in time exponential in:", options: ["Treewidth", "Number of variables", "Domain size", "Number of constraints"], explanation: "Complexity depends on treewidth of constraint graph." },
+            { text: "Constraint graph for map coloring of Australia has how many nodes?", options: ["7 (WA,NT,Q,NSW,V,SA,T)", "5", "8", "6"], explanation: "Seven Australian territories." },
+            { text: "What is the effect of arc consistency on domains of variables involved in binary constraints?", options: ["Removes values without support", "Finds a solution", "Orders values", "Creates new variables"], explanation: "Arc consistency prunes inconsistent values." },
+            { text: "Which heuristic is most useful when many variables have similar domain sizes?", options: ["Degree heuristic", "LCV", "Random", "Minimum value"], explanation: "Degree heuristic breaks ties by selecting highly constrained variable." },
+            { text: "David Waltz made contributions to AI including:", options: ["Constraint satisfaction and parallel computation", "Alpha-beta pruning", "Neural networks", "Reinforcement learning"], explanation: "David Waltz: constraint propagation (Waltz filtering) & parallel AI." },
+            { text: "In a CSP, a solution is:", options: ["A complete and consistent assignment", "Partial assignment with no conflict", "Any path to goal", "Optimal cost path"], explanation: "Solution = all variables assigned & all constraints satisfied." },
+            { text: "CSP algorithms can be combined: search + inference. Example:", options: ["Maintaining arc consistency during backtracking (MAC)", "BFS only", "Hill climbing", "Genetic algorithm"], explanation: "MAC enforces AC after each assignment." },
+            { text: "If we have variables A,B,C with domains {1,2,3} and constraints A=B, B=C, then arc consistency will:", options: ["Reduce all domains to single value", "Keep domains unchanged", "Remove all values", "Only reduce A"], explanation: "Arc consistency forces equal domains and same value." },
+            { text: "Which is true about unary constraints?", options: ["Can be eliminated by pre-processing domains", "Represent binary relations", "Are global", "Cannot be removed"], explanation: "Unary enforced via node consistency, reducing domains." },
+            { text: "What is the purpose of the BACKTRACK function in pseudocode?", options: ["Recursive depth-first assignment", "Breadth-first enumeration", "Local search", "Constraint propagation only"], explanation: "BACKTRACK recursively assigns variables & backtracks on failure." },
+            { text: "In CSP, the SELECT_UNASSIGNED_VARIABLE with MRV is also called:", options: ["Most constrained variable", "Least constrained", "Random", "Domination"], explanation: "MRV picks most constrained variable to minimize branching." },
+            { text: "Local search for CSP (e.g., min-conflicts) works by:", options: ["Starting with complete assignment and repairing conflicts", "Backtracking with heuristics", "Arc consistency only", "Divide and conquer"], explanation: "Min-conflicts effective for n-queens etc." },
+            { text: "What does the AC-3 algorithm return if domain becomes empty?", options: ["false (inconsistency detected)", "true", "partial assignment", "null"], explanation: "AC-3 returns false when any domain empty → unsolvable." },
+            { text: "Which of the following is NOT a characteristic of CSP formulation?", options: ["Fixed set of variables", "Cost of actions matters", "Domains and constraints", "Goal test based on constraints"], explanation: "Path cost irrelevant in standard CSP (all solutions equal cost)." },
+            { text: "In the slides, example constraints for exam scheduling {A≠B, A≠C, B≠C, B≠D, ...} represent:", options: ["Binary inequality constraints", "Soft timetables", "Global constraints", "Arithmetic constraints"], explanation: "Each constraint is a binary not-equal." },
+            { text: "Forward checking after assigning A=Mon for a variable A with constraint A≠B will:", options: ["Remove Mon from B.domain", "Remove all from B", "Keep B domain unchanged", "Assign B value"], explanation: "FC removes conflicting values from adjacent variables." },
+            { text: "What does the term 'thrashing' refer to in backtracking?", options: ["Repeated failure due to same reason", "Fast convergence", "Optimal pruning", "Arc consistency loops"], explanation: "Without propagation, search revisits same failures." },
+            { text: "Which algorithm is most associated with Waltz filtering?", options: ["Arc consistency for line labeling", "Min-conflicts", "AC-3", "Backtracking"], explanation: "Waltz filtering = constraint propagation for line drawings." },
+            { text: "Given three variables X,Y,Z with domains {0,1} and constraints X≠Y, Y≠Z. Arc consistency will:", options: ["Ensure each domain consistent pairwise", "Solve automatically", "Remove nothing", "Force all same"], explanation: "AC checks each directed arc, ensures support." },
+            { text: "In a CSP, the constraint graph helps to:", options: ["Identify independent subproblems", "Compute path cost", "Define heuristic values", "Evaluate utility"], explanation: "Graph structure for decomposition and propagation." },
+            { text: "Which of the following is a valid way to convert n-ary constraints to binary?", options: ["Using hidden variables", "Duplicating constraints", "Removing constraints", "Increasing domains"], explanation: "Dual or hidden variable transformations." },
+            { text: "If a CSP has no solution, backtracking with forward checking will eventually:", options: ["Return failure after exploring search tree", "Loop forever", "Find partial assignment", "Return empty domain"], explanation: "Complete backtracking explores all possibilities, returns failure." },
+            { text: "The main advantage of CSP solvers is:", options: ["Domain independence – define problem, use generic solver", "Guaranteed linear time", "No need for constraints", "Always finds optimal solution"], explanation: "Declarative: specify variables/domains/constraints, reuse algorithms." }
         ];
 
-        let currentQuestionIndex = 0;
-        let answers = {};
-        let startTime = Date.now();
-        let timerInterval;
+        // دمج النمط مع الأسئلة
+        const QUESTIONS = baseQuestions.map((q, idx) => ({
+            text: q.text,
+            options: q.options,
+            correct: correctIndices[idx],
+            explanation: q.explanation
+        }));
 
-        function initQuiz() {
-            document.getElementById('totalQuestions').textContent = questions.length;
-            renderQuestions();
-            updateProgress();
-            startTimer();
-        }
+        // عرض توزيع الإجابات في console
+        const dist = { 0: 0, 1: 0, 2: 0, 3: 0 };
+        QUESTIONS.forEach(q => dist[q.correct]++);
+        console.log(`توزيع الإجابات - a:${dist[0]}, b:${dist[1]}, c:${dist[2]}, d:${dist[3]}`);
+        console.log(`نمط أول 8 إجابات: ${answerPattern.slice(0, 8).join(',')}`);
 
-        function renderQuestions() {
-            const container = document.getElementById('questionsContainer');
-            container.innerHTML = '';
-            
-            questions.forEach((q, index) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.className = `question-container ${index === 0 ? 'active' : ''}`;
-                questionDiv.id = `question-${index}`;
-                
-                const difficultyClass = q.difficulty === 'easy' ? 'difficulty-easy' : 
-                                      q.difficulty === 'medium' ? 'difficulty-medium' : 
-                                      'difficulty-hard';
-                
-                const difficultyText = q.difficulty === 'easy' ? 'سهل' : 
-                                      q.difficulty === 'medium' ? 'متوسط' : 
-                                      'صعب';
+        let currentIndex = 0;
+        let userAnswers = new Array(60).fill(null);
+        let answerLock = new Array(60).fill(false);
+        let quizCompleted = false;
 
-                questionDiv.innerHTML = `
-                    <div class="question-number">
-                        Question ${index + 1}
-                        <span class="difficulty-badge ${difficultyClass}">${difficultyText}</span>
-                    </div>
-                    <div class="question-text">${q.question}</div>
-                    <button class="translate-btn" onclick="showTranslation(${index})">🌐 اضغط لترجمة السؤال</button>
-                    <div class="options">
-                        ${q.options.map((option, optIndex) => `
-                            <label class="option">
-                                <input type="radio" name="question-${index}" value="${optIndex}" 
-                                       ${answers[index] === optIndex ? 'checked' : ''} 
-                                       onchange="selectAnswer(${index}, ${optIndex})">
-                                ${option}
-                            </label>
-                        `).join('')}
-                    </div>
-                    <div class="explanation" id="explanation-${index}">
-                        <strong>💡 الشرح:</strong> ${q.explanation}
-                    </div>
-                `;
-                
-                container.appendChild(questionDiv);
-            });
-        }
+        const dynamicDiv = document.getElementById("dynamicContent");
+        const scoreSpan = document.getElementById("scoreValue");
+        const timerSpan = document.getElementById("timerValue");
+        const qCounterSpan = document.getElementById("qCounter");
+        const progressFill = document.getElementById("progressFill");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+        const resetBtn = document.getElementById("resetQuizBtn");
 
-        function selectAnswer(questionIndex, optionIndex) {
-            answers[questionIndex] = optionIndex;
-            updateProgress();
-            
-            setTimeout(() => {
-                const options = document.querySelectorAll(`#question-${questionIndex} .option`);
-                const explanation = document.getElementById(`explanation-${questionIndex}`);
-                
-                options.forEach((option, index) => {
-                    const input = option.querySelector('input');
-                    option.classList.remove('correct', 'incorrect', 'disabled');
-                    option.classList.add('disabled');
-                    
-                    if (index === questions[questionIndex].correct) {
-                        option.classList.add('correct');
-                    } else if (index === optionIndex) {
-                        option.classList.add('incorrect');
-                    }
-                });
-                
-                explanation.classList.add('show');
-            }, 200);
-        }
+        let timeSeconds = 0;
+        let timerInterval = null;
 
-        function showTranslation(questionIndex) {
-            const question = questions[questionIndex];
-            const modal = document.getElementById('translateModal');
-            const translateText = document.getElementById('translateText');
-            
-            translateText.innerHTML = `
-                <h2>ترجمة السؤال</h2>
-                <p><strong>${question.arabicQuestion}</strong></p>
-                <br>
-                <h3>الخيارات:</h3>
-                <ol>
-                    ${question.options.map(opt => `<li>${opt}</li>`).join('')}
-                </ol>
-            `;
-            
-            modal.style.display = 'block';
-        }
-
-        function closeTranslate() {
-            document.getElementById('translateModal').style.display = 'none';
-        }
-
-        function updateProgress() {
-            const answered = Object.keys(answers).length;
-            const total = questions.length;
-            const percentage = Math.round((answered / total) * 100);
-            
-            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
-            document.getElementById('progressPercent').textContent = percentage;
-            document.getElementById('progressFill').style.width = percentage + '%';
-            
-            const finishBtn = document.getElementById('finishBtn');
-            finishBtn.disabled = answered < total;
-        }
-
-        function nextQuestion() {
-            if (currentQuestionIndex < questions.length - 1) {
-                document.getElementById(`question-${currentQuestionIndex}`).classList.remove('active');
-                currentQuestionIndex++;
-                document.getElementById(`question-${currentQuestionIndex}`).classList.add('active');
-                updateProgress();
-                window.scrollTo(0, 0);
-            }
-        }
-
-        function prevQuestion() {
-            if (currentQuestionIndex > 0) {
-                document.getElementById(`question-${currentQuestionIndex}`).classList.remove('active');
-                currentQuestionIndex--;
-                document.getElementById(`question-${currentQuestionIndex}`).classList.add('active');
-                updateProgress();
-                window.scrollTo(0, 0);
-            }
+        function formatTime(sec) {
+            let mins = Math.floor(sec / 60);
+            let remainSec = sec % 60;
+            return `${mins.toString().padStart(2, '0')}:${remainSec.toString().padStart(2, '0')}`;
         }
 
         function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
             timerInterval = setInterval(() => {
-                const elapsed = Math.floor((Date.now() - startTime) / 1000);
-                const minutes = Math.floor(elapsed / 60);
-                const seconds = elapsed % 60;
-                document.getElementById('timer').textContent = 
-                    `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                if (!quizCompleted) {
+                    timeSeconds++;
+                    timerSpan.innerText = formatTime(timeSeconds);
+                }
             }, 1000);
         }
 
-        function finishQuiz() {
-            clearInterval(timerInterval);
-            
+        function updateStats() {
             let correctCount = 0;
-            questions.forEach((q, index) => {
-                if (answers[index] === q.correct) {
-                    correctCount++;
+            for (let i = 0; i < QUESTIONS.length; i++) {
+                if (userAnswers[i] !== null && userAnswers[i] === QUESTIONS[i].correct) correctCount++;
+            }
+            scoreSpan.innerText = `${correctCount}/${QUESTIONS.length}`;
+            qCounterSpan.innerText = `${currentIndex + 1}/${QUESTIONS.length}`;
+            let percent = ((currentIndex + 1) / QUESTIONS.length) * 100;
+            progressFill.style.width = `${percent}%`;
+        }
+
+        function renderCurrentQuestion() {
+            const q = QUESTIONS[currentIndex];
+            const selectedIdx = userAnswers[currentIndex];
+            const isLocked = answerLock[currentIndex];
+            const letters = ['a.', 'b.', 'c.', 'd.'];
+
+            let optionsHtml = '';
+            q.options.forEach((opt, idx) => {
+                let extraStyle = '';
+                let markSymbol = '';
+                if (isLocked && selectedIdx === idx) {
+                    let isCor = (idx === q.correct);
+                    extraStyle = isCor ? 'style="background:#cdeee5; border-color:#2a9d8f;"' : 'style="background:#ffe0da; border-color:#e76f51;"';
+                    markSymbol = isCor ? ' ✓' : ' ✗';
+                } else if (isLocked && idx === q.correct && selectedIdx !== null) {
+                    extraStyle = 'style="background:#d4f0e8; border-color:#52b788;"';
+                    markSymbol = ' ✓ (correct)';
                 }
+                optionsHtml += `<div class="option-row" data-opt-index="${idx}" ${extraStyle}>
+                                <span class="opt-letter">${letters[idx]}</span>
+                                <span class="opt-text">${opt}${markSymbol}</span>
+                            </div>`;
             });
-            
-            const percentage = Math.round((correctCount / questions.length) * 100);
-            
-            let message = '';
-            if (percentage >= 90) {
-                message = '🎊 أسطوري! أنت خبير حقيقي! 🎊';
-            } else if (percentage >= 80) {
-                message = '🌟 ممتاز! أداء رائع جداً! 🌟';
-            } else if (percentage >= 70) {
-                message = '👏 جيد جداً! مجهود محترم! 👏';
-            } else if (percentage >= 60) {
-                message = '✅ جيد! تابع المذاكرة قليلاً! ✅';
-            } else if (percentage >= 50) {
-                message = '⚠️ متوسط! احتاج لمراجعة أفضل! ⚠️';
-            } else {
-                message = '💪 لا تستسلم! جرب مرة أخرى! 💪';
+
+            let feedbackHtml = '';
+            if (isLocked && selectedIdx !== null) {
+                const isCorrect = (selectedIdx === q.correct);
+                feedbackHtml = `<div class="feedback-area ${isCorrect ? 'correct-feedback' : 'wrong-feedback'}">
+                                <strong>${isCorrect ? '✅ صحيح' : '❌ خطأ'}</strong><br>${q.explanation}
+                            </div>`;
             }
-            
-            document.getElementById('questionsContainer').style.display = 'none';
-            document.getElementById('navigation').style.display = 'none';
-            document.getElementById('results').classList.add('show');
-            document.getElementById('finalScore').textContent = percentage + '%';
-            document.getElementById('scoreMessage').textContent = message;
-            
-            document.getElementById('scoreDetails').innerHTML = `
-                <div style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); 
-                            padding: 20px; border-radius: 10px; margin: 20px 0;">
-                    <p style="font-size: 1.2em; color: #333;">
-                        لقد أجبت <strong>${correctCount}</strong> أسئلة بشكل صحيح من <strong>${questions.length}</strong>
-                    </p>
-                </div>
-            `;
+
+            const fullHtml = `
+            <div class="question-card">
+                <div class="q-text">${currentIndex + 1}. ${q.text}</div>
+                <div class="options-list" id="optionsList">${optionsHtml}</div>
+                ${feedbackHtml}
+            </div>
+        `;
+            dynamicDiv.innerHTML = fullHtml;
+
+            if (!isLocked) {
+                document.querySelectorAll('.option-row').forEach(el => {
+                    el.addEventListener('click', () => {
+                        if (answerLock[currentIndex]) return;
+                        const idx = parseInt(el.dataset.optIndex);
+                        userAnswers[currentIndex] = idx;
+                        answerLock[currentIndex] = true;
+                        updateStats();
+                        renderCurrentQuestion();
+                    });
+                });
+            }
+            updateStats();
         }
 
-        function restartQuiz() {
-            currentQuestionIndex = 0;
-            answers = {};
-            startTime = Date.now();
-            
-            document.getElementById('questionsContainer').style.display = 'block';
-            document.getElementById('navigation').style.display = 'flex';
-            document.getElementById('results').classList.remove('show');
-            document.getElementById('progressFill').style.width = '0%';
-            document.getElementById('progressPercent').textContent = '0';
-            
-            renderQuestions();
-            updateProgress();
+        function goPrev() { if (currentIndex > 0) { currentIndex--; renderCurrentQuestion(); } }
+        function goNext() {
+            if (currentIndex < QUESTIONS.length - 1) { currentIndex++; renderCurrentQuestion(); }
+            else {
+                const allAnswered = userAnswers.every(a => a !== null);
+                if (allAnswered) {
+                    quizCompleted = true;
+                    if (timerInterval) clearInterval(timerInterval);
+                    const correctCount = userAnswers.reduce((acc, ans, idx) => acc + (ans === QUESTIONS[idx].correct ? 1 : 0), 0);
+                    dynamicDiv.innerHTML = `<div class="complete-message">🏆 الاختبار مكتمل! النتيجة: ${correctCount}/${QUESTIONS.length} 🏆<br><span style="font-size:1rem;">⏱️ الزمن: ${formatTime(timeSeconds)}</span></div>`;
+                    updateStats();
+                } else alert(`⚠️ لديك ${userAnswers.filter(a => a === null).length} سؤالاً بدون إجابة. أجب عليها قبل الإنهاء.`);
+            }
+        }
+        function resetQuiz() {
+            quizCompleted = false;
+            userAnswers = new Array(60).fill(null);
+            answerLock = new Array(60).fill(false);
+            currentIndex = 0;
+            timeSeconds = 0;
+            if (timerInterval) clearInterval(timerInterval);
             startTimer();
+            renderCurrentQuestion();
+            updateStats();
         }
 
-        window.onclick = function(event) {
-            const modal = document.getElementById('translateModal');
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        }
+        prevBtn.addEventListener("click", goPrev);
+        nextBtn.addEventListener("click", goNext);
+        resetBtn.addEventListener("click", resetQuiz);
 
-        // تهيئة الاختبار عند تحميل الصفحة
-        document.addEventListener('DOMContentLoaded', initQuiz);
+        startTimer();
+        renderCurrentQuestion();
+        updateStats();
     </script>
 </body>
+
 </html>

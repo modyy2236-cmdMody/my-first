@@ -1,0 +1,527 @@
+[quiz.html](https://github.com/user-attachments/files/27175805/quiz.html)
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Kashmir CSP | 60 سؤال · إجابات مسلسلة a,b,c,d</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #cbdde6 0%, #a6bfcc 100%);
+            font-family: 'Segoe UI', 'Poppins', 'Inter', system-ui, -apple-system, 'Roboto', sans-serif;
+            padding: 2rem 1.5rem;
+            color: #1a3a44;
+        }
+
+        .quiz-wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: rgba(250, 252, 254, 0.94);
+            backdrop-filter: blur(2px);
+            border-radius: 2.5rem;
+            padding: 1.8rem 2rem;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.75);
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background: rgba(70, 105, 115, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 2rem;
+            border-left: 7px solid #4f7f8c;
+        }
+
+        h1 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(130deg, #1e5d6b, #32818f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 2rem;
+            background: rgba(205, 225, 235, 0.6);
+            padding: 0.3rem 1.5rem;
+            border-radius: 3rem;
+        }
+
+        .stat-card {
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: #255c6b;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: 'Courier New', monospace;
+            color: #1a505e;
+            line-height: 1.1;
+        }
+
+        .progress-container {
+            background: #cddee5;
+            border-radius: 60px;
+            margin: 1.2rem 0 2rem 0;
+            height: 10px;
+            box-shadow: inset 0 1px 4px #00000022;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #468792, #6fc1d0);
+            width: 0%;
+            height: 10px;
+            border-radius: 60px;
+            transition: width 0.25s ease;
+        }
+
+        .question-card {
+            background: #ffffffdd;
+            backdrop-filter: blur(4px);
+            border-radius: 2rem;
+            padding: 1.7rem 2rem;
+            margin-bottom: 1.8rem;
+            border: 1px solid #cde0e8;
+            box-shadow: 0 12px 25px -12px rgba(0, 0, 0, 0.2);
+        }
+
+        .q-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 1.6rem;
+            color: #1c4b58;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .option-row {
+            background: #f5fafd;
+            border-radius: 1.5rem;
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid #cbdde6;
+            font-weight: 500;
+            font-size: 1rem;
+            color: #1f4c5a;
+        }
+
+        .option-row:hover {
+            background: #eaf3f8;
+            transform: scale(0.99);
+            border-color: #689fae;
+        }
+
+        .opt-letter {
+            font-weight: 800;
+            font-size: 1.1rem;
+            min-width: 2rem;
+            color: #327a8a;
+        }
+
+        .opt-text {
+            flex: 1;
+        }
+
+        .feedback-area {
+            margin-top: 1.3rem;
+            padding: 1rem;
+            border-radius: 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            background: #edf4f8;
+            border-left: 5px solid;
+        }
+
+        .correct-feedback {
+            border-left-color: #2b8b6e;
+            background: #e0f2ec;
+            color: #165a48;
+        }
+
+        .wrong-feedback {
+            border-left-color: #cd7a6b;
+            background: #ffe9e5;
+            color: #993d2e;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin: 2rem 0 0.5rem;
+        }
+
+        button {
+            background: #4f828f;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 3rem;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background: #3d6874;
+            transform: translateY(-2px);
+        }
+
+        .reset-btn {
+            background: #8f6b5b;
+        }
+
+        .reset-btn:hover {
+            background: #755546;
+        }
+
+        .complete-message {
+            text-align: center;
+            font-size: 1.7rem;
+            font-weight: bold;
+            padding: 2rem;
+            color: #1f6779;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            opacity: 0.7;
+            color: #2c6573;
+        }
+
+        @media (max-width: 700px) {
+            .quiz-wrapper {
+                padding: 1rem;
+            }
+
+            .q-text {
+                font-size: 1.2rem;
+            }
+
+            .stat-value {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="quiz-wrapper" id="quizRoot">
+        <div class="quiz-header">
+            <h1>🧠 CSP: CONSTRAINT SATISFACTION<br><span style="font-size:0.85rem;">60 سؤال · إجابات مسلسلة a b c
+                    d</span></h1>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-label">SCORE</div>
+                    <div class="stat-value" id="scoreValue">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">TIME</div>
+                    <div class="stat-value" id="timerValue">00:00</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Q.</div>
+                    <div class="stat-value" id="qCounter">0/60</div>
+                </div>
+            </div>
+        </div>
+        <div class="progress-container">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div id="dynamicContent"></div>
+        <div class="nav-buttons">
+            <button id="prevBtn">◀ PREVIOUS</button>
+            <button id="nextBtn">NEXT ▶</button>
+            <button id="resetQuizBtn" class="reset-btn">⟳ RESET ALL</button>
+        </div>
+        <footer>✨ ... ✨</footer>
+    </div>
+
+    <script>
+        // ------------------- نمط الإجابات المسلسل حسب الطلب -----------------
+        // النمط المطلوب: 2 إجابات a، ثم 1 b، ثم 3 d، ثم 2 c
+        // ثم نكرر بأنماط متنوعة طول الـ 60 سؤال
+        const answerPattern = [
+            // 1-8:  2a,1b,3d,2c
+            'a', 'a', 'b', 'd', 'd', 'd', 'c', 'c',
+            // 9-15: 1a,2b,1c,1d
+            'a', 'b', 'b', 'c', 'd',
+            // 16-22: 2a,2b,1c, (2)
+            'a', 'a', 'b', 'b', 'c',
+            // 23-28: 1d,2a,1b
+            'd', 'a', 'a', 'b',
+            // 29-35: 2c,1d,2a
+            'c', 'c', 'd', 'a', 'a',
+            // 36-42: 1b,2d,1c,1a
+            'b', 'd', 'd', 'c', 'a',
+            // 43-49: 2b,1c,2d
+            'b', 'b', 'c', 'd', 'd',
+            // 50-55: 1a,2b,1c
+            'a', 'b', 'b', 'c',
+            // 56-60: 2d,1a,2c (آخر 5)
+            'd', 'd', 'a', 'c', 'c'
+        ];
+        // التأكد من أن الطول 60
+        while (answerPattern.length < 60) answerPattern.push('a');
+        while (answerPattern.length > 60) answerPattern.pop();
+
+        // تحويل الحروف إلى indices (0=a,1=b,2=c,3=d)
+        const correctIndices = answerPattern.map(letter => {
+            if (letter === 'a') return 0;
+            if (letter === 'b') return 1;
+            if (letter === 'c') return 2;
+            return 3; // d
+        });
+
+        // بناء الأسئلة مع الإجابات الصحيحة وفق النمط المطلوب
+        const baseQuestions = [
+            { text: "What are the three core components of a Constraint Satisfaction Problem (CSP)?", options: ["States, actions, goal test", "Variables, domains, constraints", "Nodes, edges, paths", "Heuristics, pruning, backtracking"], explanation: "CSP is formally: set of variables X, each with domain D_i, and constraints C specifying allowable combinations." },
+            { text: "In CSPs, a state is defined by:", options: ["A path cost function", "A black box data structure", "Variables assigned values from domains", "Only unary constraints"], explanation: "Unlike generic search, CSP states are assignments of values to some/all variables from their domains." },
+            { text: "Which of the following is an example of a real-world CSP?", options: ["Finding prime numbers", "Timetabling / exam scheduling", "Sorting an array", "Compiling source code"], explanation: "Timetabling, assignment, floor planning, scheduling are classic CSP applications." },
+            { text: "In a binary CSP, each constraint relates:", options: ["Exactly one variable", "At most two variables", "At least three variables", "All variables globally"], explanation: "Binary CSP: each constraint involves ≤2 variables, represented as arcs in constraint graph." },
+            { text: "Constraint graph in binary CSP has:", options: ["Variables as arcs and constraints as nodes", "Variables as nodes, constraints as arcs", "Domains as nodes", "Values as edges"], explanation: "Nodes = variables, arcs = binary constraints." },
+            { text: "A complete assignment in a CSP with n variables each of domain size d has how many possible assignments?", options: ["n*d", "d^n", "n^d", "d*n"], explanation: "There are d choices per variable → total assignments = d^n." },
+            { text: "Which search algorithm is the foundation for solving CSPs by assigning one variable at a time?", options: ["Breadth-first search", "Depth-first search with backtracking", "A* search", "Hill climbing"], explanation: "Backtracking = DFS that assigns one variable per node & backtracks on constraint violation." },
+            { text: "In backtracking search for CSP, assignments are commutative. This means:", options: ["Order of variable assignment does not matter", "Domains are commutative", "Constraints are symmetric", "Values can be swapped"], explanation: "Commutativity allows us to fix an ordering and assign one variable at a time." },
+            { text: "MRV heuristic stands for:", options: ["Most Relevant Variable", "Minimum Remaining Values", "Maximum Range Value", "Minimum Recursive Validation"], explanation: "MRV chooses variable with fewest legal values – 'most constrained variable' heuristic." },
+            { text: "Least Constraining Value (LCV) heuristic aims to:", options: ["Pick value that rules out fewest values for neighbors", "Pick the largest domain", "Pick value used most often", "Randomize choice"], explanation: "LCV leaves maximum flexibility for remaining unassigned variables." },
+            { text: "Forward checking in CSP does what?", options: ["Checks all future constraints", "After assigning a variable, removes inconsistent values from neighbors' domains", "Only checks unary constraints", "Performs arc consistency on whole graph"], explanation: "FC keeps track of legal values for unassigned variables & stops when any domain becomes empty." },
+            { text: "Arc consistency for a directed arc (X→Y) means:", options: ["Every value of X has a support in Y", "Domains of X and Y are equal", "X's domain size = Y's domain size", "No constraints between X and Y"], explanation: "∀x∈D_X ∃y∈D_Y such that constraint (X,Y) satisfied." },
+            { text: "The AC-3 algorithm maintains a queue of arcs and calls which function to revise domains?", options: ["REVISE", "PRUNE", "CONSIST", "FILTER"], explanation: "AC-3 uses REVISE(csp,X,Y) to remove inconsistent values from X.domain." },
+            { text: "Node consistency removes values violating:", options: ["Binary constraints", "Unary constraints", "Global constraints", "Path constraints"], explanation: "Node-consistent if all values satisfy unary constraints on that variable." },
+            { text: "If after arc consistency a variable's domain becomes empty, the CSP is:", options: ["Unsatisfiable", "Satisfiable with many solutions", "Needs backtracking", "Trivially solved"], explanation: "Empty domain → no possible value → no solution." },
+            { text: "In the map coloring example (Australia), variables are regions and domains are {red, green, blue}. Constraint: adjacent regions must have different colors. What type of constraint?", options: ["Global all-different", "Binary inequality constraint", "Unary constraint", "Soft constraint"], explanation: "Each adjacency like WA≠NT is binary inequality." },
+            { text: "Tasmania in Australian map coloring is an independent subproblem because:", options: ["No constraints with mainland", "It has only one color", "It has the smallest domain", "It's unconnected"], explanation: "Tasmania has no edges to other variables → solved separately." },
+            { text: "Sudoku can be formulated as a CSP with what kind of global constraint?", options: ["All-different on rows, columns, boxes", "Sum constraints", "Equality constraints", "Path consistency"], explanation: "Every row/column/box must have distinct values (all-different)." },
+            { text: "Infinite domain CSPs (e.g., job scheduling with T1 + d ≤ T2) are often solved using:", options: ["Constraint language and linear programming", "Exhaustive enumeration", "Only heuristics", "Forward checking alone"], explanation: "Infinite domains require constraint languages and OR techniques." },
+            { text: "Soft constraints / preferences are represented as:", options: ["Cost functions", "Hard binary constraints", "Equality constraints", "Node consistency"], explanation: "Preferences assign costs → constrained optimization." },
+            { text: "Which is NOT a typical improvement over basic backtracking?", options: ["MRV", "LCV", "Forward Checking", "Bidirectional search"], explanation: "Bidirectional search not typical for CSP; common: MRV, LCV, FC, propagation." },
+            { text: "What does SELECT-UNASSIGNED-VARIABLE in backtracking do?", options: ["Chooses next variable using heuristics like MRV", "Assigns random variable", "Picks variable with max domain", "Selects constrained value"], explanation: "Selects variable (often MRV or degree heuristic)." },
+            { text: "Degree heuristic for variable selection picks:", options: ["Variable with largest number of constraints with other unassigned variables", "Smallest domain", "Most common value", "Random"], explanation: "Degree: choose variable involved in most constraints to reduce branching." },
+            { text: "If a CSP is tree-structured (constraint graph is a tree), it can be solved in:", options: ["Linear time", "Exponential time", "Polynomial with high degree", "NP-hard"], explanation: "Tree-structured CSPs solved in O(nd²) via directed arc consistency." },
+            { text: "Which algorithm achieves arc consistency in CSP?", options: ["AC-3", "DPLL", "FC", "Min-conflicts"], explanation: "AC-3 is the standard for binary CSP arc consistency." },
+            { text: "Path consistency generalizes arc consistency to:", options: ["Three or more variables", "Only unary constraints", "Continuous domains", "Preferences"], explanation: "Path consistency considers triples of variables." },
+            { text: "CSPs differ from standard search problems because in CSPs:", options: ["We care about the goal state itself, not the path", "Paths have different costs", "Actions have costs", "State space is infinite"], explanation: "We need the satisfying assignment (goal state) not sequence of actions." },
+            { text: "In the CSP formulation of exam scheduling (variables: courses, days {Mon,Tue,Wed}), constraint A≠B means:", options: ["Courses A and B cannot be same day", "They must be same day", "A after B", "B before A"], explanation: "A≠B forces different exam slots." },
+            { text: "A constraint (A≠Mon, B≠Tue, A≠B) after node consistency on A with A≠Mon will:", options: ["Remove Mon from A's domain", "Remove Tue from B", "Remove Wed from A", "Nothing"], explanation: "Node consistency removes Mon from A domain." },
+            { text: "What is the role of constraint propagation in CSP solvers?", options: ["Inference that reduces domains using constraints", "Generating random assignments", "Ordering variables", "Path cost calculation"], explanation: "Propagation (like arc consistency) reduces search space by pruning." },
+            { text: "Which of the following is a global constraint?", options: ["AllDiff", "X≠Y", "X>Y", "X=Y"], explanation: "AllDiff involves many variables (must be all different)." },
+            { text: "Backtracking search with forward checking detects inconsistency when:", options: ["Any variable loses all values in its domain", "Goal test fails", "Leaf node reached", "Assignment complete"], explanation: "FC stops branch as soon as any unassigned variable empty domain." },
+            { text: "In the REVISE procedure (X→Y), if no y in Y.domain supports a given x, what happens?", options: ["x is removed from X.domain", "Y is removed", "Constraint is deleted", "X and Y swapped"], explanation: "REVISE removes unsupported values to enforce arc consistency." },
+            { text: "A CSP solver with only backtracking and no inference may suffer from:", options: ["Thrashing", "Polynomial complexity", "Optimality", "No failure detection"], explanation: "Without propagation, backtracking repeatedly fails on same reasons (thrashing)." },
+            { text: "Which search method explores partial assignments with one variable at a time and backtracks when constraint violated?", options: ["Backtracking DFS", "BFS with pruning", "Iterative deepening", "Simulated annealing"], explanation: "Standard CSP solving approach." },
+            { text: "What is the complexity of AC-3 for binary CSP with n variables, domain size d, and c constraints?", options: ["O(c d^3)", "O(n^2 d^2)", "O(2^n)", "O(d^n)"], explanation: "AC-3 worst-case O(cd³)." },
+            { text: "If a graph is not tree-structured but we can perform tree decomposition, we can solve it in time exponential in:", options: ["Treewidth", "Number of variables", "Domain size", "Number of constraints"], explanation: "Complexity depends on treewidth of constraint graph." },
+            { text: "Constraint graph for map coloring of Australia has how many nodes?", options: ["7 (WA,NT,Q,NSW,V,SA,T)", "5", "8", "6"], explanation: "Seven Australian territories." },
+            { text: "What is the effect of arc consistency on domains of variables involved in binary constraints?", options: ["Removes values without support", "Finds a solution", "Orders values", "Creates new variables"], explanation: "Arc consistency prunes inconsistent values." },
+            { text: "Which heuristic is most useful when many variables have similar domain sizes?", options: ["Degree heuristic", "LCV", "Random", "Minimum value"], explanation: "Degree heuristic breaks ties by selecting highly constrained variable." },
+            { text: "David Waltz made contributions to AI including:", options: ["Constraint satisfaction and parallel computation", "Alpha-beta pruning", "Neural networks", "Reinforcement learning"], explanation: "David Waltz: constraint propagation (Waltz filtering) & parallel AI." },
+            { text: "In a CSP, a solution is:", options: ["A complete and consistent assignment", "Partial assignment with no conflict", "Any path to goal", "Optimal cost path"], explanation: "Solution = all variables assigned & all constraints satisfied." },
+            { text: "CSP algorithms can be combined: search + inference. Example:", options: ["Maintaining arc consistency during backtracking (MAC)", "BFS only", "Hill climbing", "Genetic algorithm"], explanation: "MAC enforces AC after each assignment." },
+            { text: "If we have variables A,B,C with domains {1,2,3} and constraints A=B, B=C, then arc consistency will:", options: ["Reduce all domains to single value", "Keep domains unchanged", "Remove all values", "Only reduce A"], explanation: "Arc consistency forces equal domains and same value." },
+            { text: "Which is true about unary constraints?", options: ["Can be eliminated by pre-processing domains", "Represent binary relations", "Are global", "Cannot be removed"], explanation: "Unary enforced via node consistency, reducing domains." },
+            { text: "What is the purpose of the BACKTRACK function in pseudocode?", options: ["Recursive depth-first assignment", "Breadth-first enumeration", "Local search", "Constraint propagation only"], explanation: "BACKTRACK recursively assigns variables & backtracks on failure." },
+            { text: "In CSP, the SELECT_UNASSIGNED_VARIABLE with MRV is also called:", options: ["Most constrained variable", "Least constrained", "Random", "Domination"], explanation: "MRV picks most constrained variable to minimize branching." },
+            { text: "Local search for CSP (e.g., min-conflicts) works by:", options: ["Starting with complete assignment and repairing conflicts", "Backtracking with heuristics", "Arc consistency only", "Divide and conquer"], explanation: "Min-conflicts effective for n-queens etc." },
+            { text: "What does the AC-3 algorithm return if domain becomes empty?", options: ["false (inconsistency detected)", "true", "partial assignment", "null"], explanation: "AC-3 returns false when any domain empty → unsolvable." },
+            { text: "Which of the following is NOT a characteristic of CSP formulation?", options: ["Fixed set of variables", "Cost of actions matters", "Domains and constraints", "Goal test based on constraints"], explanation: "Path cost irrelevant in standard CSP (all solutions equal cost)." },
+            { text: "In the slides, example constraints for exam scheduling {A≠B, A≠C, B≠C, B≠D, ...} represent:", options: ["Binary inequality constraints", "Soft timetables", "Global constraints", "Arithmetic constraints"], explanation: "Each constraint is a binary not-equal." },
+            { text: "Forward checking after assigning A=Mon for a variable A with constraint A≠B will:", options: ["Remove Mon from B.domain", "Remove all from B", "Keep B domain unchanged", "Assign B value"], explanation: "FC removes conflicting values from adjacent variables." },
+            { text: "What does the term 'thrashing' refer to in backtracking?", options: ["Repeated failure due to same reason", "Fast convergence", "Optimal pruning", "Arc consistency loops"], explanation: "Without propagation, search revisits same failures." },
+            { text: "Which algorithm is most associated with Waltz filtering?", options: ["Arc consistency for line labeling", "Min-conflicts", "AC-3", "Backtracking"], explanation: "Waltz filtering = constraint propagation for line drawings." },
+            { text: "Given three variables X,Y,Z with domains {0,1} and constraints X≠Y, Y≠Z. Arc consistency will:", options: ["Ensure each domain consistent pairwise", "Solve automatically", "Remove nothing", "Force all same"], explanation: "AC checks each directed arc, ensures support." },
+            { text: "In a CSP, the constraint graph helps to:", options: ["Identify independent subproblems", "Compute path cost", "Define heuristic values", "Evaluate utility"], explanation: "Graph structure for decomposition and propagation." },
+            { text: "Which of the following is a valid way to convert n-ary constraints to binary?", options: ["Using hidden variables", "Duplicating constraints", "Removing constraints", "Increasing domains"], explanation: "Dual or hidden variable transformations." },
+            { text: "If a CSP has no solution, backtracking with forward checking will eventually:", options: ["Return failure after exploring search tree", "Loop forever", "Find partial assignment", "Return empty domain"], explanation: "Complete backtracking explores all possibilities, returns failure." },
+            { text: "The main advantage of CSP solvers is:", options: ["Domain independence – define problem, use generic solver", "Guaranteed linear time", "No need for constraints", "Always finds optimal solution"], explanation: "Declarative: specify variables/domains/constraints, reuse algorithms." }
+        ];
+
+        // دمج النمط مع الأسئلة
+        const QUESTIONS = baseQuestions.map((q, idx) => ({
+            text: q.text,
+            options: q.options,
+            correct: correctIndices[idx],
+            explanation: q.explanation
+        }));
+
+        // عرض توزيع الإجابات في console
+        const dist = { 0: 0, 1: 0, 2: 0, 3: 0 };
+        QUESTIONS.forEach(q => dist[q.correct]++);
+        console.log(`توزيع الإجابات - a:${dist[0]}, b:${dist[1]}, c:${dist[2]}, d:${dist[3]}`);
+        console.log(`نمط أول 8 إجابات: ${answerPattern.slice(0, 8).join(',')}`);
+
+        let currentIndex = 0;
+        let userAnswers = new Array(60).fill(null);
+        let answerLock = new Array(60).fill(false);
+        let quizCompleted = false;
+
+        const dynamicDiv = document.getElementById("dynamicContent");
+        const scoreSpan = document.getElementById("scoreValue");
+        const timerSpan = document.getElementById("timerValue");
+        const qCounterSpan = document.getElementById("qCounter");
+        const progressFill = document.getElementById("progressFill");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+        const resetBtn = document.getElementById("resetQuizBtn");
+
+        let timeSeconds = 0;
+        let timerInterval = null;
+
+        function formatTime(sec) {
+            let mins = Math.floor(sec / 60);
+            let remainSec = sec % 60;
+            return `${mins.toString().padStart(2, '0')}:${remainSec.toString().padStart(2, '0')}`;
+        }
+
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                if (!quizCompleted) {
+                    timeSeconds++;
+                    timerSpan.innerText = formatTime(timeSeconds);
+                }
+            }, 1000);
+        }
+
+        function updateStats() {
+            let correctCount = 0;
+            for (let i = 0; i < QUESTIONS.length; i++) {
+                if (userAnswers[i] !== null && userAnswers[i] === QUESTIONS[i].correct) correctCount++;
+            }
+            scoreSpan.innerText = `${correctCount}/${QUESTIONS.length}`;
+            qCounterSpan.innerText = `${currentIndex + 1}/${QUESTIONS.length}`;
+            let percent = ((currentIndex + 1) / QUESTIONS.length) * 100;
+            progressFill.style.width = `${percent}%`;
+        }
+
+        function renderCurrentQuestion() {
+            const q = QUESTIONS[currentIndex];
+            const selectedIdx = userAnswers[currentIndex];
+            const isLocked = answerLock[currentIndex];
+            const letters = ['a.', 'b.', 'c.', 'd.'];
+
+            let optionsHtml = '';
+            q.options.forEach((opt, idx) => {
+                let extraStyle = '';
+                let markSymbol = '';
+                if (isLocked && selectedIdx === idx) {
+                    let isCor = (idx === q.correct);
+                    extraStyle = isCor ? 'style="background:#cdeee5; border-color:#2a9d8f;"' : 'style="background:#ffe0da; border-color:#e76f51;"';
+                    markSymbol = isCor ? ' ✓' : ' ✗';
+                } else if (isLocked && idx === q.correct && selectedIdx !== null) {
+                    extraStyle = 'style="background:#d4f0e8; border-color:#52b788;"';
+                    markSymbol = ' ✓ (correct)';
+                }
+                optionsHtml += `<div class="option-row" data-opt-index="${idx}" ${extraStyle}>
+                                <span class="opt-letter">${letters[idx]}</span>
+                                <span class="opt-text">${opt}${markSymbol}</span>
+                            </div>`;
+            });
+
+            let feedbackHtml = '';
+            if (isLocked && selectedIdx !== null) {
+                const isCorrect = (selectedIdx === q.correct);
+                feedbackHtml = `<div class="feedback-area ${isCorrect ? 'correct-feedback' : 'wrong-feedback'}">
+                                <strong>${isCorrect ? '✅ صحيح' : '❌ خطأ'}</strong><br>${q.explanation}
+                            </div>`;
+            }
+
+            const fullHtml = `
+            <div class="question-card">
+                <div class="q-text">${currentIndex + 1}. ${q.text}</div>
+                <div class="options-list" id="optionsList">${optionsHtml}</div>
+                ${feedbackHtml}
+            </div>
+        `;
+            dynamicDiv.innerHTML = fullHtml;
+
+            if (!isLocked) {
+                document.querySelectorAll('.option-row').forEach(el => {
+                    el.addEventListener('click', () => {
+                        if (answerLock[currentIndex]) return;
+                        const idx = parseInt(el.dataset.optIndex);
+                        userAnswers[currentIndex] = idx;
+                        answerLock[currentIndex] = true;
+                        updateStats();
+                        renderCurrentQuestion();
+                    });
+                });
+            }
+            updateStats();
+        }
+
+        function goPrev() { if (currentIndex > 0) { currentIndex--; renderCurrentQuestion(); } }
+        function goNext() {
+            if (currentIndex < QUESTIONS.length - 1) { currentIndex++; renderCurrentQuestion(); }
+            else {
+                const allAnswered = userAnswers.every(a => a !== null);
+                if (allAnswered) {
+                    quizCompleted = true;
+                    if (timerInterval) clearInterval(timerInterval);
+                    const correctCount = userAnswers.reduce((acc, ans, idx) => acc + (ans === QUESTIONS[idx].correct ? 1 : 0), 0);
+                    dynamicDiv.innerHTML = `<div class="complete-message">🏆 الاختبار مكتمل! النتيجة: ${correctCount}/${QUESTIONS.length} 🏆<br><span style="font-size:1rem;">⏱️ الزمن: ${formatTime(timeSeconds)}</span></div>`;
+                    updateStats();
+                } else alert(`⚠️ لديك ${userAnswers.filter(a => a === null).length} سؤالاً بدون إجابة. أجب عليها قبل الإنهاء.`);
+            }
+        }
+        function resetQuiz() {
+            quizCompleted = false;
+            userAnswers = new Array(60).fill(null);
+            answerLock = new Array(60).fill(false);
+            currentIndex = 0;
+            timeSeconds = 0;
+            if (timerInterval) clearInterval(timerInterval);
+            startTimer();
+            renderCurrentQuestion();
+            updateStats();
+        }
+
+        prevBtn.addEventListener("click", goPrev);
+        nextBtn.addEventListener("click", goNext);
+        resetBtn.addEventListener("click", resetQuiz);
+
+        startTimer();
+        renderCurrentQuestion();
+        updateStats();
+    </script>
+</body>
+
+</html>
